@@ -1,0 +1,230 @@
+/*
+ * Copyright (c) 2013 Alessandro Di Martino
+ *
+ * If you want to use the HTML and CSS that this website consists of please see:
+ * https://github.com/zeis/alessandrodimartino.com
+ *
+ * License:
+ * https://raw.github.com/zeis/zeis.github.com/master/LICENSE
+ *
+ */
+
+body {
+  background-color: #333;
+  color: #555;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+#navigation {
+  margin: 0 auto;
+  padding: 15px 0;
+  width: 610px;
+}
+
+#navigation a:hover {
+  color: #e65c7c;
+}
+
+.nav-item {
+  padding-left: 0px;
+  padding-right: 30px;
+  float: left;
+}
+
+.current-nav-item {
+  margin-right: 30px;
+  float: left;
+  font-weight: bold;
+}
+
+.current-nav-item a {
+  color: #e65c7c;
+}
+
+#top-bar {
+  position:fixed;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+#container-wrapper {
+  margin-top: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+#container {
+  margin: 0 auto;
+  padding-top: 70px;
+  padding-bottom: 50px;
+  width: 610px;
+  border-bottom: 4px solid #e65c7c;
+}
+
+header {
+  width: 610px;
+}
+
+#blog-title {
+  margin: 0;
+  font-size: 54px;
+}
+
+#blog-title a {
+  color: #333;
+}
+
+#blog-title a:hover {
+  color: #333;
+}
+
+#blog-subtitle {
+  font-size: 20px;
+  color: #888;
+}
+
+#top-separator {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  border: none;
+  border-top: 1px dotted #aaa;
+}
+
+.spacer {
+  width: 100%;
+  height: 50px;
+}
+
+.post-date {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: #888;
+}
+
+.archive-post-title {
+  font-weight: bold;
+}
+
+#bottom-separator {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  border: none;
+  border-top: 1px dotted #aaa;
+  display: block;
+}
+
+#pagination {
+  margin-top: 50px;
+}
+
+.page-number, .next-page {
+  margin-left: 12px;
+}
+
+footer {
+  margin: 0 auto;
+  display: block;
+  padding: 20px 0 30px 0;
+  width: 610px;
+  clear: both;
+  color: #999;
+}
+
+footer a {
+  color: #e65c7c;
+}
+
+footer a:hover {
+  color: #ddd;
+}
+
+.pipe-separator {
+  margin: 0 5px;
+}
+
+.references {
+  margin-top: 30px;
+  margin-bottom: 5px;
+  text-indent: 0;
+  color: #888;
+}
+
+.reference {
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.highlight {
+  margin-top: 20px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  border: 1px solid #ccc;
+  border-left: 8px solid #ccc;
+  background-color: #fcfcfc;
+  overflow: auto;
+}
+
+.inline-code {
+  margin: 0 2px;
+  padding: 0px 5px;
+  white-space: nowrap;
+  border: 1px solid #ccc;
+  background-color: #fafafa;
+}
+
+#at-symbol {
+  margin: 0 5px;
+  width: 13px;
+  height: 11px;
+}
+
+.image {
+  margin: 20px 0;
+  clear: both;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: #458;
+}
+
+a:hover {
+  color: #e65c7c;
+}
+
+p {
+  clear: both;
+  display: block;
+}
+
+p + p {
+  text-indent: 30px;
+}
+
+code {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 20px;
+  font-family: Consolas, Monaco, 'DejaVu Sans Mono', monospace;
+}
+
+code > span {
+  white-space: nowrap;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  color: #333;
+}
+
+pre {
+  padding: 0 15px;
+}
