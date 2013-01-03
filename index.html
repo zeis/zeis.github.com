@@ -9,7 +9,7 @@ title: Alessandro Di Martino
     <a class='post-title' href='{{ post.url }}'>{{ post.title }}</a>
   </h1>
   <p class='post-date'>{{ post.date | date_to_string }}</p>
-  <p>{{ post.content }}</p>
+  {{ post.content }}
 </article>
 <div class='spacer'></div>
 {% endfor %}
