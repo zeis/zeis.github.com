@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv='content-type' content='text/html; charset=utf-8'>
-    <title>Alessandro Di Martino</title>
+    <title>C Pointer Conversions</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='/css/pygments.css' rel='stylesheet'>
     <link href='/css/normalize.css' rel='stylesheet'>
@@ -34,18 +34,18 @@
     <div id='top-bar'>
       <nav id='navigation'>
         
+        <a class='nav-item' href='/'>
+          <i class='icon-home'></i>
+          HOME
+        </a>
+        
+        
         <div class='current-nav-item'>
-          <a href='/'>
-            <i class='icon-home'></i>
-            HOME
+          <a href='/archive.html'>
+            <i class='icon-folder-close'></i>
+            ARCHIVE
           </a>
         </div>
-        
-        
-        <a class='nav-item' href='/archive.html'>
-          <i class='icon-folder-close'></i>
-          ARCHIVE
-        </a>
         
         
         <a class='nav-item' href='/about.html'>
@@ -72,11 +72,8 @@
           <h2 id='blog-subtitle'>Usability, responsiveness, clean code... some words I like</h2>
         </header>
         <hr id='top-separator'/>
-        
-<article>
-  <h1>
-    <a class='post-title' href='/c-pointer-conversions.html'>C Pointer Conversions</a>
-  </h1>
+        <article>
+  <h1>C Pointer Conversions</h1>
   <p class='post-date'>07 Jan 2013</p>
   <p>In C, pointers to one type may be converted to pointers to another type. A pointer to an object may be converted to a pointer to an object whose type requires less or equally strict storage alignment, and back again without change.</p>
 
@@ -117,26 +114,6 @@
 
 </article>
 <div class='spacer'></div>
-
-<article>
-  <h1>
-    <a class='post-title' href='/amdahls-law.html'>Amdahl&#39;s Law</a>
-  </h1>
-  <p class='post-date'>03 Jan 2013</p>
-  <p>Amdahl's Law is a model used to quantify the maximum expected performance gain that can be obtained by improving only some parts of a system. The Law states that the overall improvement of a system is limited by the time the improved part is used. In other words, as you can see in the following example, it is better to improve the most frequent case than to make enhancements to rarely used parts of a program.
-<img class='image' src='/images/amdahls-law.jpg' width='610' height='256' alt='Amdahl&#39;s law'/>
-Consider a task consisting of two sequential parts, where, the purple one takes 70% of the time of the whole computation and, the blue part, the remaining 30%. By working hard, one may be able to make the blue part 3 times faster, but this only reduces the time for the whole computation by a 20%. In contrast, one may need to perform less work to make the purple part be twice as fast, obtaining a speedup of 35%.</p>
-
-<p class='references'>References:</p>
-
-
-<p class='reference'>Wikipedia.org. http://en.wikipedia.org/wiki/Amdahl&#39;s&#95;law</p>
-
-
-</article>
-<div class='spacer'></div>
-
-
 
       </div>
     </div>
