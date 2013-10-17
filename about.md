@@ -8,7 +8,7 @@ About
 I'm italian and I'm a computer engineering student.
 My interests are in software development, web design and computer graphics.
 
-<img class='image' src='/images/alessandro-di-martino.jpg' alt='Alessandro Di Martino photo'/>
+<img src='/img/alessandro-di-martino.jpg' alt='Alessandro Di Martino photo'/>
 
 Skills
 ------
@@ -26,4 +26,4 @@ Skills
 
 Contact Me
 ----------
-aledimax<img id='at-symbol' src='/images/at-symbol.png' alt='At symbol'/>gmail.com
+aledimax<img id='at-symbol' src='/img/at-symbol.png' alt='At symbol'/>gmail.com
