@@ -78,43 +78,41 @@
     <a class='post-title' href='/c-pointer-conversions.html'>C Pointer Conversions</a>
   </h1>
   <p class='post-date'>07 Jan 2013</p>
-  <p>In C, pointers to one type may be converted to pointers to another type. A pointer to an object may be converted to a pointer to an object whose type requires less or equally strict storage alignment, and back again without change.</p>
+  <p>In C, pointers to a type may be converted to pointers to another type.</p>
 
-<p>In many circumstances, <code class="inline-code">void</code> pointers are preferred. Pointers  to type <code class="inline-code">void</code> are pointers which point to a value which has no type, this allows <code class="inline-code">void</code> pointers to point to any data type. However in C++ (unlike in C) conversions from pointers to any type to pointers to type <code class="inline-code">void</code> require an explicit conversion.</p>
+<p>According to the current C Standard &#8211; ISO/IEC 9899:2011:</p>
 
-<p>Below is an example. The comments on the following code refer to a 64-bit architecture (Intel Core i7) and the MSVC Compiler:</p>
+<blockquote>
+<p>A pointer to an object or incomplete type may be converted to a pointer to a different object or incomplete type. If the resulting pointer is not correctly aligned for the pointed&#8209;to type, the behavior is undefined.</p>
+</blockquote>
 
-<div class="highlight"><pre><code class="cpp"><span class="cp">#include &lt;stdio.h&gt;;</span>
+<p>It basically means, that a pointer to a type that has more restrictive alignment requirements should never be converted to a pointer to a type that has less restrictive alignment requirements.</p>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">const</span> <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="mf">371564759.278651</span><span class="p">;</span>
+<p>For example, in the case of a 64-bit system where <code>int</code> is aligned to 4 bytes, and <code>long</code> is aligned to 8 bytes, the conversion from <code>int*</code> to <code>long*</code> has undefined behavior.</p>
+<div class='highlight'><pre><code class='c'><span class='kt'>void</span> <span class='nf'>func</span><span class='p'>(</span><span class='kt'>void</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='kt'>int</span> <span class='n'>i</span><span class='p'>;</span>
+    <span class='kt'>long</span><span class='o'>*</span> <span class='n'>lp</span><span class='p'>;</span>
 
-    <span class="c1">// Pointers of different type have the same size:</span>
-    <span class="c1">// 8 bytes on a 64-bit platform.</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%u&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">));</span> <span class="c1">// 8</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%u&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">));</span>   <span class="c1">// 8</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%u&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">));</span>   <span class="c1">// 8</span>
+    <span class='n'>printf</span><span class='p'>(</span><span class='s'>&quot;</span><span class='se'>\n</span><span class='s'>%u&quot;</span><span class='p'>,</span> <span class='p'>(</span><span class='kt'>unsigned</span> <span class='kt'>int</span><span class='p'>)</span><span class='k'>sizeof</span><span class='p'>(</span><span class='kt'>int</span><span class='p'>));</span>   <span class='cm'>/* 4 */</span>
+    <span class='n'>printf</span><span class='p'>(</span><span class='s'>&quot;</span><span class='se'>\n</span><span class='s'>%u&quot;</span><span class='p'>,</span> <span class='p'>(</span><span class='kt'>unsigned</span> <span class='kt'>int</span><span class='p'>)</span><span class='k'>sizeof</span><span class='p'>(</span><span class='kt'>long</span><span class='p'>));</span>  <span class='cm'>/* 8 */</span>
 
-    <span class="c1">// Pointer conversions do not affect result</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%f&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>  <span class="c1">// 371564759.278651</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%f&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>  <span class="c1">// 371564759.278651</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%f&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span> <span class="c1">// 371564759.278651</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%f&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)(</span><span class="kt">long</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>  <span class="c1">// 371564759.278651</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class='n'>lp</span> <span class='o'>=</span> <span class='p'>(</span><span class='kt'>long</span><span class='o'>*</span><span class='p'>)</span><span class='o'>&amp;</span><span class='n'>i</span><span class='p'>;</span>  <span class='cm'>/* This should be avoided! */</span>
+<span class='p'>}</span>
 </code></pre></div>
+<h2 id='converting__pointers'>Converting <code>void*</code> Pointers</h2>
 
+<p>Pointers to type <code>void</code> are pointers that point to a value that has no type, this allows <code>void*</code> pointers to point to any data type.</p>
 
+<p>A pointer to any type may be converted to a pointer to <code>void</code> and back again to the original type without loss of information.</p>
+<div class='highlight'><pre><code class='c'><span class='kt'>void</span> <span class='nf'>func</span><span class='p'>(</span><span class='kt'>void</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='kt'>int</span> <span class='n'>i</span><span class='p'>;</span>
+    <span class='kt'>void</span><span class='o'>*</span> <span class='n'>vp</span><span class='p'>;</span>
+    <span class='kt'>int</span><span class='o'>*</span> <span class='n'>ip</span><span class='p'>;</span>
 
-
-<p class="references">References:</p>
-
-
-<p class='reference'>Brian W. Kernighan and Dennis M. Ritchie. The C Programming Language, Second Edition.</p>
-
-
+    <span class='n'>vp</span> <span class='o'>=</span> <span class='p'>(</span><span class='kt'>void</span><span class='o'>*</span><span class='p'>)</span><span class='o'>&amp;</span><span class='n'>i</span><span class='p'>;</span>
+    <span class='n'>ip</span> <span class='o'>=</span> <span class='p'>(</span><span class='kt'>int</span><span class='o'>*</span><span class='p'>)</span><span class='n'>vp</span><span class='p'>;</span> <span class='cm'>/* ip now contains the address of i */</span>
+<span class='p'>}</span>
+</code></pre></div>
 </article>
 <div class='spacer'></div>
 
@@ -123,16 +121,12 @@
     <a class='post-title' href='/amdahls-law.html'>Amdahl&#39;s Law</a>
   </h1>
   <p class='post-date'>03 Jan 2013</p>
-  <p>Amdahl's Law is a model used to quantify the maximum expected performance gain that can be obtained by improving only some parts of a system. The Law states that the overall improvement of a system is limited by the time the improved part is used. In other words, as you can see in the following example, it is better to improve the most frequent case than to make enhancements to rarely used parts of a program.
-<img class='image' src='/images/amdahls-law.jpg' width='610' height='256' alt='Amdahl&#39;s law'/>
-Consider a task consisting of two sequential parts, where, the purple one takes 70% of the time of the whole computation and, the blue part, the remaining 30%. By working hard, one may be able to make the blue part 3 times faster, but this only reduces the time for the whole computation by a 20%. In contrast, one may need to perform less work to make the purple part be twice as fast, obtaining a speedup of 35%.</p>
+  <img alt='Amdahl&#39;s law' height='256' src='/img/amdahls-law.png' width='610' />
+<p>Consider a process (represented by the topmost bar in the picture) consisting of two sequential parts. The first one (red) takes 70% of the time of the whole process, and the other one (blue) takes the remaining 30%. In order to make the process faster, you might have decided to work on optimizing the blue part. However, given the limited time of the blue part, it turns out that even making it 3 times faster would only bring an overall gain to the process of 20%. Conversely, it may be esasier to work on the red part to make it 2 times faster, obtaining a total speedup of 35%.</p>
 
-<p class='references'>References:</p>
+<p>Amdahl&#8217;s law is a model used to quantify the maximum expected performance gain that can be obtained by improving only some parts of a system. The law states that the overall improvement of a system is limited by the time the improved part is used.</p>
 
-
-<p class='reference'>Wikipedia.org. http://en.wikipedia.org/wiki/Amdahl&#39;s&#95;law</p>
-
-
+<p>In conclusion, in most cases it is better to improve the most frequent case than make enhancements to rarely used parts.</p>
 </article>
 <div class='spacer'></div>
 

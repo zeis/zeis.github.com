@@ -75,16 +75,12 @@
         <article>
   <h1>Amdahl&#39;s Law</h1>
   <p class='post-date'>03 Jan 2013</p>
-  <p>Amdahl's Law is a model used to quantify the maximum expected performance gain that can be obtained by improving only some parts of a system. The Law states that the overall improvement of a system is limited by the time the improved part is used. In other words, as you can see in the following example, it is better to improve the most frequent case than to make enhancements to rarely used parts of a program.
-<img class='image' src='/images/amdahls-law.jpg' width='610' height='256' alt='Amdahl&#39;s law'/>
-Consider a task consisting of two sequential parts, where, the purple one takes 70% of the time of the whole computation and, the blue part, the remaining 30%. By working hard, one may be able to make the blue part 3 times faster, but this only reduces the time for the whole computation by a 20%. In contrast, one may need to perform less work to make the purple part be twice as fast, obtaining a speedup of 35%.</p>
+  <img alt='Amdahl&#39;s law' height='256' src='/img/amdahls-law.png' width='610' />
+<p>Consider a process (represented by the topmost bar in the picture) consisting of two sequential parts. The first one (red) takes 70% of the time of the whole process, and the other one (blue) takes the remaining 30%. In order to make the process faster, you might have decided to work on optimizing the blue part. However, given the limited time of the blue part, it turns out that even making it 3 times faster would only bring an overall gain to the process of 20%. Conversely, it may be esasier to work on the red part to make it 2 times faster, obtaining a total speedup of 35%.</p>
 
-<p class='references'>References:</p>
+<p>Amdahl&#8217;s law is a model used to quantify the maximum expected performance gain that can be obtained by improving only some parts of a system. The law states that the overall improvement of a system is limited by the time the improved part is used.</p>
 
-
-<p class='reference'>Wikipedia.org. http://en.wikipedia.org/wiki/Amdahl&#39;s&#95;law</p>
-
-
+<p>In conclusion, in most cases it is better to improve the most frequent case than make enhancements to rarely used parts.</p>
 </article>
 <div class='spacer'></div>
 

@@ -1,19 +1,9 @@
-/*
- * Copyright (c) 2013 Alessandro Di Martino
- *
- * If you want to use the HTML and CSS that this website consists of please see:
- * https://github.com/zeis/alessandrodimartino.com
- *
- * License:
- * https://raw.github.com/zeis/zeis.github.com/master/LICENSE
- *
- */
-
 body {
   background-color: #333;
   color: #555;
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
+  overflow-y: scroll;
 }
 
 #navigation {
@@ -185,12 +175,6 @@ footer a:hover {
   height: 11px;
 }
 
-.image {
-  margin: 20px 0;
-  clear: both;
-  display: block;
-}
-
 a {
   text-decoration: none;
   color: #458;
@@ -205,13 +189,8 @@ p {
   display: block;
 }
 
-p + p {
-  text-indent: 30px;
-}
-
 code {
-  font-size: 13px;
-  font-weight: bold;
+  font-size: inherit;
   line-height: 20px;
   font-family: Consolas, Monaco, 'DejaVu Sans Mono', monospace;
 }

@@ -75,43 +75,41 @@
         <article>
   <h1>C Pointer Conversions</h1>
   <p class='post-date'>07 Jan 2013</p>
-  <p>In C, pointers to one type may be converted to pointers to another type. A pointer to an object may be converted to a pointer to an object whose type requires less or equally strict storage alignment, and back again without change.</p>
+  <p>In C, pointers to a type may be converted to pointers to another type.</p>
 
-<p>In many circumstances, <code class="inline-code">void</code> pointers are preferred. Pointers  to type <code class="inline-code">void</code> are pointers which point to a value which has no type, this allows <code class="inline-code">void</code> pointers to point to any data type. However in C++ (unlike in C) conversions from pointers to any type to pointers to type <code class="inline-code">void</code> require an explicit conversion.</p>
+<p>According to the current C Standard &#8211; ISO/IEC 9899:2011:</p>
 
-<p>Below is an example. The comments on the following code refer to a 64-bit architecture (Intel Core i7) and the MSVC Compiler:</p>
+<blockquote>
+<p>A pointer to an object or incomplete type may be converted to a pointer to a different object or incomplete type. If the resulting pointer is not correctly aligned for the pointed&#8209;to type, the behavior is undefined.</p>
+</blockquote>
 
-<div class="highlight"><pre><code class="cpp"><span class="cp">#include &lt;stdio.h&gt;;</span>
+<p>It basically means, that a pointer to a type that has more restrictive alignment requirements should never be converted to a pointer to a type that has less restrictive alignment requirements.</p>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">const</span> <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="mf">371564759.278651</span><span class="p">;</span>
+<p>For example, in the case of a 64-bit system where <code>int</code> is aligned to 4 bytes, and <code>long</code> is aligned to 8 bytes, the conversion from <code>int*</code> to <code>long*</code> has undefined behavior.</p>
+<div class='highlight'><pre><code class='c'><span class='kt'>void</span> <span class='nf'>func</span><span class='p'>(</span><span class='kt'>void</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='kt'>int</span> <span class='n'>i</span><span class='p'>;</span>
+    <span class='kt'>long</span><span class='o'>*</span> <span class='n'>lp</span><span class='p'>;</span>
 
-    <span class="c1">// Pointers of different type have the same size:</span>
-    <span class="c1">// 8 bytes on a 64-bit platform.</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%u&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">));</span> <span class="c1">// 8</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%u&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">));</span>   <span class="c1">// 8</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%u&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">));</span>   <span class="c1">// 8</span>
+    <span class='n'>printf</span><span class='p'>(</span><span class='s'>&quot;</span><span class='se'>\n</span><span class='s'>%u&quot;</span><span class='p'>,</span> <span class='p'>(</span><span class='kt'>unsigned</span> <span class='kt'>int</span><span class='p'>)</span><span class='k'>sizeof</span><span class='p'>(</span><span class='kt'>int</span><span class='p'>));</span>   <span class='cm'>/* 4 */</span>
+    <span class='n'>printf</span><span class='p'>(</span><span class='s'>&quot;</span><span class='se'>\n</span><span class='s'>%u&quot;</span><span class='p'>,</span> <span class='p'>(</span><span class='kt'>unsigned</span> <span class='kt'>int</span><span class='p'>)</span><span class='k'>sizeof</span><span class='p'>(</span><span class='kt'>long</span><span class='p'>));</span>  <span class='cm'>/* 8 */</span>
 
-    <span class="c1">// Pointer conversions do not affect result</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%f&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>  <span class="c1">// 371564759.278651</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%f&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>  <span class="c1">// 371564759.278651</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%f&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span> <span class="c1">// 371564759.278651</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">%f&quot;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)(</span><span class="kt">long</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>  <span class="c1">// 371564759.278651</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class='n'>lp</span> <span class='o'>=</span> <span class='p'>(</span><span class='kt'>long</span><span class='o'>*</span><span class='p'>)</span><span class='o'>&amp;</span><span class='n'>i</span><span class='p'>;</span>  <span class='cm'>/* This should be avoided! */</span>
+<span class='p'>}</span>
 </code></pre></div>
+<h2 id='converting__pointers'>Converting <code>void*</code> Pointers</h2>
 
+<p>Pointers to type <code>void</code> are pointers that point to a value that has no type, this allows <code>void*</code> pointers to point to any data type.</p>
 
+<p>A pointer to any type may be converted to a pointer to <code>void</code> and back again to the original type without loss of information.</p>
+<div class='highlight'><pre><code class='c'><span class='kt'>void</span> <span class='nf'>func</span><span class='p'>(</span><span class='kt'>void</span><span class='p'>)</span> <span class='p'>{</span>
+    <span class='kt'>int</span> <span class='n'>i</span><span class='p'>;</span>
+    <span class='kt'>void</span><span class='o'>*</span> <span class='n'>vp</span><span class='p'>;</span>
+    <span class='kt'>int</span><span class='o'>*</span> <span class='n'>ip</span><span class='p'>;</span>
 
-
-<p class="references">References:</p>
-
-
-<p class='reference'>Brian W. Kernighan and Dennis M. Ritchie. The C Programming Language, Second Edition.</p>
-
-
+    <span class='n'>vp</span> <span class='o'>=</span> <span class='p'>(</span><span class='kt'>void</span><span class='o'>*</span><span class='p'>)</span><span class='o'>&amp;</span><span class='n'>i</span><span class='p'>;</span>
+    <span class='n'>ip</span> <span class='o'>=</span> <span class='p'>(</span><span class='kt'>int</span><span class='o'>*</span><span class='p'>)</span><span class='n'>vp</span><span class='p'>;</span> <span class='cm'>/* ip now contains the address of i */</span>
+<span class='p'>}</span>
+</code></pre></div>
 </article>
 <div class='spacer'></div>
 
