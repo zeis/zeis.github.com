@@ -1,22 +1,15 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta http-equiv='content-type' content='text/html; charset=utf-8'>
+    <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href='/css/pygments.css' rel='stylesheet'>
-    <link href='/css/normalize.css' rel='stylesheet'>
-    <link href='/css/font-awesome.min.css' rel='stylesheet'>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600|PT+Serif:400,700,400italic|Source+Code+Pro:500" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
-    <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
+    <script src="/js/html5shiv.js"></script>
     <![endif]-->
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="/css/font-awesome-ie7.min.css">
-    <![endif]-->
-    <link href='/css/style.css' rel='stylesheet'>
-    <link rel='shortcut icon' href='favicon.ico'>
-
-    <!-- Google Analytics (Remove or update this code with your Analytics ID if you forked the GitHub repo) -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/daylight.css">
+    <!-- Google Analytics - Begin -->
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-23698429-2']);
@@ -26,81 +19,29 @@
        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
        })();
-     </script>
-    <!-- Google Analytics end-->
-
+    </script>
+    <!-- Google Analytics - End -->
   </head>
   <body>
-    <div id='top-bar'>
-      <nav id='navigation'>
-        {% if page.url == '/index.html' %}
-        <div class='current-nav-item'>
-          <a href='/'>
-            <i class='icon-home'></i>
-            HOME
-          </a>
-        </div>
-        {% else %}
-        <a class='nav-item' href='/'>
-          <i class='icon-home'></i>
-          HOME
-        </a>
-        {% endif %}
-        {% if page.url == '/archive.html' or (page.url != '/index.html' and page.url != '/about.html') %}
-        <div class='current-nav-item'>
-          <a href='/archive.html'>
-            <i class='icon-folder-close'></i>
-            ARCHIVE
-          </a>
-        </div>
-        {% else %}
-        <a class='nav-item' href='/archive.html'>
-          <i class='icon-folder-close'></i>
-          ARCHIVE
-        </a>
-        {% endif %}
-        {% if page.url == '/about.html' %}
-        <div class='current-nav-item'>
-          <a href='/about.html'>
-            <i class='icon-star'></i>
-            ABOUT
-          </a>
-        </div>
-        {% else %}
-        <a class='nav-item' href='/about.html'>
-          <i class='icon-star'></i>
-          ABOUT
-        </a>
-        {% endif %}
-        <a class='nav-item' href='https://github.com/zeis'>
-          <i class='icon-github-alt'></i>
-          GITHUB
-        </a>
-        <a class='nav-item' href='https://twitter.com/aledimax'>
-          <i class='icon-twitter'></i>
-          TWITTER
-        </a>
-      </nav>
-    </div>
-    <div id='container-wrapper'>
-      <div id='container'>
-        <header>
-          <h1 id='blog-title'>
-            <a href='/'>Alessandro Di Martino</a>
-          </h1>
-          <h2 id='blog-subtitle'>Usability, responsiveness, clean code... some words I like</h2>
-        </header>
-        <hr id='top-separator'/>
-        {{ content }}
-      </div>
-    </div>
+    <header>
+      <h1 id="title">
+        <a href="/">Alessandro Di Martino</a>
+      </h1>
+    </header>
+    <section>
+      {{ content }}
+    </section>
     <footer>
-      <p>Powered by <a href='https://github.com/mojombo/jekyll'>Jekyll</a>
-        <span class='pipe-separator'>|</span>
-        Hosting by <a href='http://pages.github.com/'>GitHub Pages</a>
-        <span class='pipe-separator'>|</span>
-        <a href='https://github.com/zeis/zeis.github.com'>Design</a>
-        by <a href='http://alessandrodimartino.com'>Alessandro Di Martino</a>
+      <nav id="footer-nav">
+        {% if page.url != "/index.html" %}
+        <a href="/" id="footer-nav-first-item">Home</a>
+        {% endif %}
+        <a href="mailto:aledimax@gmail.com" class="footer-nav-item">aledimax@gmail.com</a>
+        <a href="//twitter.com/aledimax" class="footer-nav-item">Twitter</a>
+        <a href="//github.com/zeis" class="footer-nav-item">GitHub</a>
+      </nav>
+      <p>
+        Fork on <a href="//github.com/zeis/zeis.github.com">GitHub</a>!
       </p>
     </footer>
   </body>

@@ -3,44 +3,12 @@ layout: default
 title: Alessandro Di Martino
 ---
 
-{% for post in paginator.posts %}
-<article>
-  <h1>
-    <a class='post-title' href='{{ post.url }}'>{{ post.title }}</a>
-  </h1>
-  <p class='post-date'>{{ post.date | date_to_string }}</p>
-  {{ post.content }}
+{% for post in site.posts %}
+<article itemscope="" itemtype="http://schema.org/Blog">
+  <time datetime="{{ post.date | date: '%Y-%m-%d' }}" itemprop="datePublished" class="post-link-date">{{ post.date | date_to_string }}</time>
+  <span class="post-link-divider">~</span>
+  <h2 class="post-link">
+    <a href="{{ post.url }}">{{ post.title }}</a>
+  </h2>
 </article>
-<div class='spacer'></div>
 {% endfor %}
-{% if paginator.total_pages > 5 %}
-<hr id='bottom-separator'/>
-<nav id='pagination'>
-  {% if paginator.previous_page %}
-  {% if paginator.previous_page == 1 %}
-  <a href='/'>← Previous</a>
-  {% else %}
-  <a href='/page{{paginator.previous_page}}'>← Previous</a>
-  {% endif %}
-  {% else %}
-  <span>← Previous</span>
-  {% endif %}
-  {% if paginator.page == 1 %}
-  <span class='current-page page-number'>1</span>
-  {% else %}
-  <a href='/' class='page-number'>1</a>
-  {% endif %}
-  {% for count in (2..paginator.total_pages) %}
-  {% if count == paginator.page %}
-  <span class='current-page page-number'>{{count}}</span>
-  {% else %}
-  <a href='/page{{count}}' class='page-number'>{{count}}</a>
-  {% endif %}
-  {% endfor %}
-  {% if paginator.next_page %}
-  <a href='/page{{paginator.next_page}}' class='next-page'>Next →</a>
-  {% else %}
-  <span class='next-page'>Next →</span>
-  {% endif %}
-</nav>
-{% endif %}

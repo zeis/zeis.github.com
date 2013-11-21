@@ -1,0 +1,62 @@
+/* Classes */
+code .nc {
+  color: #a26fff;
+}
+
+/* Comments */
+code .c,
+code .cm,
+code .c1,
+code .cs {
+  font-style: italic;
+  color: #908b78;
+}
+
+/* Constants, Operator Words */
+code .kc,
+code .ow {
+  color: #d946ff;
+}
+
+/* Functions, Attributes, Variables */
+code .nf,
+code .na,
+code .nv {
+  color: #f64383;
+}
+
+/* Keywords, Tags */
+code .k,
+code .kd,
+code .kn,
+code .kp,
+code .kr,
+code .nt {
+  color: #3c96ba;
+}
+
+/* Numbers */
+code .m,
+code .mf,
+code .mh,
+code .mi,
+code .mo,
+code .il {
+  color: #479c63;
+}
+
+/* Strings */
+code .s,
+code .sb,
+code .sc,
+code .sd,
+code .s2,
+code .se,
+code .sh,
+code .si,
+code .sx,
+code .sr,
+code .s1,
+code .ss {
+  color: #ed5900;
+}
