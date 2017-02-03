@@ -1,7 +1,9 @@
 # zeis.github.com
 
-This repository hosts the source code and content of [alessandrodimartino.com](http://alessandrodimartino.com).
+This repository hosts the source code and the content of my old website.
 
-The site is statically generated using the Jekyll engine. The layout is minimalist and responsive, if you like it feel free to use the HTML and CSS as you please or fork the project.
+The site is statically generated using the Jekyll engine.
 
-The project is released under the open-source MIT License.
+The layout is very minimalist, feel free to fork the project and use this layout as you please.
+
+The project is released under the MIT open-source License.
